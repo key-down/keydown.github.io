@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="welcome" data-lang-ar="مرحباً" data-lang-en="Welcome">hhhh</div>
+
+<script>
+  const localeInfo = new Intl.Locale(navigator.language);
+
+console.log('معلومات اللغة:', {
+  اللغة: localeInfo.language,          // مثل "ar"
+  الإقليم: localeInfo.region,          // مثل "SA"
+  النص: localeInfo.textInfo,           // معلومات اتجاه النص
+  التقويم: localeInfo.calendar,        // نوع التقويم
+  الترقيم: localeInfo.numberingSystem  // نظام الترقيم
+});
+</script>
+</body>
+</html>

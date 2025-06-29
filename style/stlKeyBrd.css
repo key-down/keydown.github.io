@@ -1,0 +1,167 @@
+.keyboard-desktop {
+  display: flex; /* لترتيب لوحة المفاتيح الرئيسية ولوحة الأرقام بجانب بعضهما */
+  gap: 10px; /* تقليل المسافة */
+  background-color: #333; /* خلفية لوحة المفاتيح */
+  border-radius: 8px; /* حواف أقل حدة */
+  padding: 15px 12px; /* تقليل الحشو */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  width: fit-content;
+}
+.clicked {
+  background-color: #17a2a9 !important;/* لون مفتاح مضغوط */
+  color: #fff; /* لون نص فاتح */
+}
+.main-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* تقليل التباعد بين الصفوف */
+}
+
+.numpad {
+  display: flex;
+  flex-direction: row;
+  gap: 6px; /* تقليل التباعد بين الصفوف */
+  margin-top: -3px; /* تقليل المسافة بين لوحة المفاتيح الرئيسية ولوحة الأرقام */
+  background-color: #333; /* خلفية لوحة الأرقام */
+  border-radius: 6px; /* حواف أقل حدة */
+  padding: 9px; /* تقليل الحشو */
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 4px; /* تقليل التباعد بين المفاتيح */
+  justify-content: flex-start; /* تبدأ من اليسار */
+}
+
+.lftdv,
+.rghtDv {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px; /* تقليل التباعد بين الصفوف */
+}
+.key {
+  width: 30px; /* تصغير حجم المفاتيح */
+  height: 30px;
+  background-color: #555; /* لون المفاتيح */
+  border: none;
+  border-radius: 4px; /* حواف أقل حدة */
+  color: #fff; /* لون النص */
+  font-size: 12px; /* تصغير حجم الخط */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease,
+    box-shadow 0.2s ease;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2); /* ظل داخلي */
+  gap: 3px;
+}
+
+.key:hover {
+  background-color: #666; /* لون التمرير */
+  transform: translateY(-1px); /* تأثير طفيف */
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.key:active {
+  background-color: #444; /* لون الضغط */
+  transform: translateY(0);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* أحجام مفاتيح خاصة - تم تصغير القيم */
+.backspace-key {
+  width: 65px;
+      font-size: 10px;
+}
+
+.tab-key,
+.backslash-key,
+.caps-key {
+  width: 48px;
+}
+
+.enter-key {
+  width: 82px;
+}
+
+.shift-key.left {
+  width: 65px;
+}
+
+.shift-key.right {
+  width: 99px;
+}
+
+.ctrl-key,
+.win-key,
+.alt-key,
+.fn-key {
+  width: 40px;
+}
+.win-key{
+    width: 50px; /* زيادة عرض مفتاح ويندوز قليلاً */
+}
+.space-key {
+  flex-grow: 1;
+  max-width: 210px; /* تقليل الحد الأقصى */
+}
+
+.function-key,
+.utility-key,
+.nav-key {
+  font-size: 10px; /* تصغير خط المفاتيح الخاصة */
+  padding: 0 3px;
+  background-color: #444; /* لون أغمق للمفاتيح الخاصة */
+  width: 34px;
+}
+
+.spacer {
+  width: 10px; /* تقليل حجم الفواصل */
+}
+
+.spacer.large {
+  width: 17px; /* تقليل حجم الفواصل الكبيرة */
+}
+
+/* مفاتيح الأسهم */
+.arrow-keys-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px; /* تقليل التباعد */
+  width: calc(3 * 30px + 2 * 4px); /* عرض مناسب */
+}
+
+.arrow-key.empty {
+  background-color: transparent;
+  box-shadow: none;
+  cursor: default;
+  width: 25px;
+}
+
+.arrow-key.empty:hover {
+  background-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.arrow-key {
+  font-size: 14px; /* حجم أسهم أكبر قليلاً */
+}
+
+/* لوحة الأرقام (Numpad) - تم تصغير القيم */
+.numpad .key {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.numpad-key.tall {
+  height: calc(2 * 30px + 15px);
+}
+
+.numpad-key.double-width {
+  width: calc(2 * 32px + 4px);
+}

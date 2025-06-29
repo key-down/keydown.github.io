@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة مفاتيح مكتبية مصغرة</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #282c34; /* خلفية سوداء */
+        margin: 0;
+        font-family: Arial, sans-serif; /* خط قياسي */
+        /* تم إزالة direction: rtl */
+      }
+
+      .keyboard-desktop {
+        display: flex; /* لترتيب لوحة المفاتيح الرئيسية ولوحة الأرقام بجانب بعضهما */
+        gap: 10px; /* تقليل المسافة */
+        background-color: #333; /* خلفية لوحة المفاتيح */
+        border-radius: 8px; /* حواف أقل حدة */
+        padding: 15px 12px; /* تقليل الحشو */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
+
+      .main-keyboard {
+        display: flex;
+        flex-direction: column;
+        gap: 6px; /* تقليل التباعد بين الصفوف */
+      }
+
+      .numpad {
+        display: flex;
+        flex-direction: row;
+        gap: 6px; /* تقليل التباعد بين الصفوف */
+        margin-top: -3px; /* تقليل المسافة بين لوحة المفاتيح الرئيسية ولوحة الأرقام */
+        background-color: #333; /* خلفية لوحة الأرقام */
+        border-radius: 6px; /* حواف أقل حدة */
+        padding: 9px; /* تقليل الحشو */
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .keyboard-row {
+        display: flex;
+        gap: 4px; /* تقليل التباعد بين المفاتيح */
+        justify-content: flex-start; /* تبدأ من اليسار */
+      }
+
+      .lftdv , .rghtDv {
+        display: flex;
+        flex-direction: column;
+        
+        gap: 9px; /* تقليل التباعد بين الصفوف */
+      }
+      .key {
+        width: 30px; /* تصغير حجم المفاتيح */
+        height: 30px;
+        background-color: #555; /* لون المفاتيح */
+        border: none;
+        border-radius: 4px; /* حواف أقل حدة */
+        color: #fff; /* لون النص */
+        font-size: 12px; /* تصغير حجم الخط */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease,
+          box-shadow 0.2s ease;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2); /* ظل داخلي */
+      }
+
+      .key:hover {
+        background-color: #666; /* لون التمرير */
+        transform: translateY(-1px); /* تأثير طفيف */
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .key:active {
+        background-color: #444; /* لون الضغط */
+        transform: translateY(0);
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      /* أحجام مفاتيح خاصة - تم تصغير القيم */
+      .backspace-key {
+        width: 65px;
+      }
+
+      .tab-key,
+      .backslash-key,
+      .caps-key {
+        width: 48px;
+      }
+
+      .enter-key {
+        width: 82px;
+      }
+
+      .shift-key.left {
+        width: 65px;
+      }
+
+      .shift-key.right {
+        width: 99px;
+      }
+
+      .ctrl-key,
+      .win-key,
+      .alt-key,
+      .fn-key {
+        width: 40px;
+      }
+
+      .space-key {
+        flex-grow: 1;
+        max-width: 250px; /* تقليل الحد الأقصى */
+      }
+
+      .function-key,
+      .utility-key,
+      .nav-key {
+        font-size: 10px; /* تصغير خط المفاتيح الخاصة */
+        padding: 0 3px;
+        background-color: #444; /* لون أغمق للمفاتيح الخاصة */
+        width: 34px;
+      }
+
+      .spacer {
+        width: 10px; /* تقليل حجم الفواصل */
+      }
+
+      .spacer.large {
+        width: 17px; /* تقليل حجم الفواصل الكبيرة */
+      }
+
+      /* مفاتيح الأسهم */
+      .arrow-keys-block {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px; /* تقليل التباعد */
+        width: calc(3 * 30px + 2 * 4px); /* عرض مناسب */
+      }
+
+      .arrow-key.empty {
+        background-color: transparent;
+        box-shadow: none;
+        cursor: default;
+        width: 36px;
+      }
+
+      .arrow-key.empty:hover {
+        background-color: transparent;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .arrow-key {
+        font-size: 14px; /* حجم أسهم أكبر قليلاً */
+      }
+
+      /* لوحة الأرقام (Numpad) - تم تصغير القيم */
+      .numpad .key {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+      }
+
+      .numpad-key.tall {
+        height: calc(2 * 30px + 15px);
+      }
+
+      .numpad-key.double-width {
+        width: calc(2 * 32px + 4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="keyboard-desktop">
+      <div class="main-keyboard">
+        <div class="keyboard-row">
+          <button class="key" id="kEscape">Esc</button>
+          <button class="key function-key" id="kF1">F1</button>
+          <button class="key function-key" id="kF2">F2</button>
+          <button class="key function-key" id="kF3">F3</button>
+          <button class="key function-key" id="kF4">F4</button>
+          <span class="spacer"></span>
+          <button class="key function-key" id="kF5">F5</button>
+          <button class="key function-key" id="kF6">F6</button>
+          <button class="key function-key" id="kF7">F7</button>
+          <button class="key function-key" id="kF8">F8</button>
+          <span class="spacer"></span>
+          <button class="key function-key" id="kF9">F9</button>
+          <button class="key function-key" id="kF10">F10</button>
+          <button class="key function-key" id="kF11">F11</button>
+          <button class="key function-key" id="kF12">F12</button>
+          <span class="spacer "></span>
+          <button class="key utility-key" id="kPrintScreen">PrtSc</button>
+          <button class="key utility-key" id="kScrollLock">ScrlLck</button>
+          <button class="key utility-key" id="kPauseBreak">Pause</button>
+        </div>
+
+        <div class="keyboard-row">
+          <button class="key" id="kTilda">`</button>
+          <button class="key" id="k1">1</button>
+          <button class="key" id="k2">2</button>
+          <button class="key" id="k3">3</button>
+          <button class="key" id="k4">4</button>
+          <button class="key" id="k5">5</button>
+          <button class="key" id="k6">6</button>
+          <button class="key" id="k7">7</button>
+          <button class="key" id="k8">8</button>
+          <button class="key" id="k9">9</button>
+          <button class="key" id="k0">0</button>
+          <button class="key" id="kMinus">-</button>
+          <button class="key" id="kEquals">=</button>
+          <button class="key backspace-key" id="kBackspace">Backspace</button>
+          <span class="spacer large"></span>
+          <button class="key nav-key" id="kInsert">Ins</button>
+          <button class="key nav-key" id="kHome">Home</button>
+          <button class="key nav-key" id="kPageUp">PgUp</button>
+        </div>
+
+        <div class="keyboard-row">
+          <button class="key tab-key" id="kTab">Tab</button>
+          <button class="key" id="kQ">Q</button>
+          <button class="key" id="kW">W</button>
+          <button class="key" id="kE">E</button>
+          <button class="key" id="kR">R</button>
+          <button class="key" id="kT">T</button>
+          <button class="key" id="kY">Y</button>
+          <button class="key" id="kU">U</button>
+          <button class="key" id="kI">I</button>
+          <button class="key" id="kO">O</button>
+          <button class="key" id="kP">P</button>
+          <button class="key" id="kOpenBracket">[</button>
+          <button class="key" id="kCloseBracket">]</button>
+          <button class="key backslash-key" id="kBackslash">\</button>
+          <span class="spacer large"></span>
+          <button class="key nav-key" id="kDelete">Del</button>
+          <button class="key nav-key" id="kEnd">End</button>
+          <button class="key nav-key" id="kPageDown">PgDn</button>
+        </div>
+
+        <div class="keyboard-row">
+          <button class="key caps-key" id="kCapsLock">Caps Lock</button>
+          <button class="key" id="kA">A</button>
+          <button class="key" id="kS">S</button>
+          <button class="key" id="kD">D</button>
+          <button class="key" id="kF">F</button>
+          <button class="key" id="kG">G</button>
+          <button class="key" id="kH">H</button>
+          <button class="key" id="kJ">J</button>
+          <button class="key" id="kK">K</button>
+          <button class="key" id="kL">L</button>
+          <button class="key" id="kSemicolon">;</button>
+          <button class="key" id="kQuote">'</button>
+          <button class="key enter-key" id="kEnter">Enter</button>
+        </div>
+
+        <div class="keyboard-row">
+          <button class="key shift-key left" id="kLeftShift">Shift</button>
+          <button class="key" id="kZ">Z</button>
+          <button class="key" id="kX">X</button>
+          <button class="key" id="kC">C</button>
+          <button class="key" id="kV">V</button>
+          <button class="key" id="kB">B</button>
+          <button class="key" id="kN">N</button>
+          <button class="key" id="kM">M</button>
+          <button class="key" id="kComma">,</button>
+          <button class="key" id="kPeriod">.</button>
+          <button class="key" id="kSlash">/</button>
+          <button class="key shift-key right" id="kRightShift">Shift</button>
+          <span class="spacer large"></span>
+          <div class="arrow-keys-block">
+            <button class="key arrow-key empty"></button
+            ><!-- 
+                    <button class="key arrow-key empty"></button> -->
+            <button class="key arrow-key" id="kArrowUp">&#9650;</button>
+          </div>
+        </div>
+
+        <div class="keyboard-row">
+          <button class="key ctrl-key" id="kLeftCtrl">Ctrl</button>
+          <button class="key win-key" id="kLeftWin">Win</button>
+          <button class="key alt-key" id="kLeftAlt">Alt</button>
+          <button class="key space-key" id="kSpace">Space</button>
+          <button class="key alt-key" id="kRightAlt">Alt</button>
+          <button class="key fn-key" id="kFn">Fn</button>
+          <button class="key ctrl-key" id="kRightCtrl">Ctrl</button>
+          <span class="spacer large"></span>
+          <div class="arrow-keys-block">
+            <button class="key arrow-key" id="kArrowLeft">&#9664;</button>
+            <button class="key arrow-key" id="kArrowDown">&#9660;</button>
+            <button class="key arrow-key" id="kArrowRight">&#9654;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="numpad">
+        <div class="lftdv">
+          <div class="keyboard-row">
+            <button class="key numpad-key" id="kNumLock">Num Lock</button>
+            <button class="key numpad-key" id="kNumDivide">/</button>
+            <button class="key numpad-key" id="kNumMultiply">*</button>
+          </div>
+          <div class="keyboard-row">
+            <button class="key numpad-key" id="kNum7">7</button>
+            <button class="key numpad-key" id="kNum8">8</button>
+            <button class="key numpad-key" id="kNum9">9</button>
+          </div>
+          <div class="keyboard-row">
+            <button class="key numpad-key" id="kNum4">4</button>
+            <button class="key numpad-key" id="kNum5">5</button>
+            <button class="key numpad-key" id="kNum6">6</button>
+          </div>
+          <div class="keyboard-row">
+            <button class="key numpad-key" id="kNum1">1</button>
+            <button class="key numpad-key" id="kNum2">2</button>
+            <button class="key numpad-key" id="kNum3">3</button>
+          </div>
+          <div class="keyboard-row">
+            <button class="key numpad-key double-width" id="kNum0">0</button>
+            <button class="key numpad-key" id="kNumDecimal">.</button>
+          </div>
+        </div>
+        <div class="rghtDv">
+          <button class="key numpad-key" id="kNumMinus">-</button>
+          <button class="key numpad-key tall" id="kNumPlus">+</button>
+          <button class="key numpad-key tall" id="kNumEnter">Enter</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

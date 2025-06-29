@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="imgs/imgkeybrd.jpg" sizes="any" />
+		<title>is Clicked</title>
+		<link rel="stylesheet" href="style/style.css" />
+		<link rel="stylesheet" href="style/stlKeyBrd.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>is Clicked</h1>
+
+			<p>Entrez du texte :</p>
+      <!-- Input text -->
+			<input type="text" id="keyboardInput" />
+			<div style="display: flex; flex-direction: row; justify-content: center">
+				<span id="characterPr1" class="char"></span>
+				<span style="width: 15px"> </span>
+				<span id="characterPr" class="char"></span>
+			</div>
+
+			<!-- keyboard -->
+			<div id="keyboardId"></div>
+
+			<!-- Table -->
+			<div class="table-container">
+				<h3>Propriétés des événements du clavier</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Données</th>
+							<th>keydown</th>
+							<th>keypress</th>
+							<th>keyup</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>keyCode</td>
+							<td id="kd-keyCode"></td>
+							<td id="kp-keyCode"></td>
+							<td id="ku-keyCode"></td>
+						</tr>
+						<tr style="display: none">
+							<td>charCode</td>
+							<td id="kd-charCode"></td>
+							<td id="kp-charCode"></td>
+							<td id="ku-charCode"></td>
+						</tr>
+						<tr>
+							<td>Character</td>
+							<td colspan="3" id="character"></td>
+						</tr>
+						<tr>
+							<td>Shift</td>
+							<td colspan="3" id="shift"></td>
+						</tr>
+						<tr>
+							<td>Ctrl</td>
+							<td colspan="3" id="ctrl"></td>
+						</tr>
+						<tr>
+							<td>Alt</td>
+							<td colspan="3" id="alt"></td>
+						</tr>
+						<tr>
+							<td>Meta</td>
+							<td colspan="3" id="meta"></td>
+						</tr>
+
+						<tr style="display: none">
+							<td>Target</td>
+							<td colspan="3" id="target"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="log-container"></div>
+		</div>
+
+		<script src="js/script.js"></script>
+		<script src="js/keyBrd.js"></script>
+	</body>
+</html>
